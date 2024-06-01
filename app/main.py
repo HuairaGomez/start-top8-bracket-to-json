@@ -1,14 +1,13 @@
 from typing import Optional
 import requests
 import uvicorn
-
-from fastapi import FastAPI
-
-app = FastAPI()
+from flask import Flask, request
 
 
 STARTGG_ENDPOINT = 'https://api.start.gg/gql/alpha'
-STARTGG_TOKEN = '4bc70a02bdf40fff325f20ef90cfa690'
+STARTGG_TOKEN = ''
+
+application = Flask(__name__)
 
 
 def get_tag_by_name(name: str) -> str:
@@ -30,7 +29,7 @@ def get_score(standing) -> Optional[int]:
 
 global_winners_qf = None
 
-@app.get('/bracket')
+@application.route('/bracket')
 def bracket():
     global global_winners_qf
     print("before")
@@ -62,7 +61,7 @@ def bracket():
     response = requests.post(
         STARTGG_ENDPOINT,
         headers={
-            'Content-Type': 'application/json',
+            'Content-Type': 'applicationlication/json',
             'Authorization': f'Bearer {STARTGG_TOKEN}'
         },
         json={'query': query},
@@ -181,7 +180,3 @@ def bracket():
     print("after")
     print(global_winners_qf)
     return matches
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
