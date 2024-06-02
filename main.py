@@ -4,7 +4,7 @@ from flask_cors import CORS
 from pysmashgg import SmashGG
 
 STARTGG_ENDPOINT = 'https://api.start.gg/gql/alpha'
-STARTGG_TOKEN = '4bc70a02bdf40fff325f20ef90cfa690'
+STARTGG_TOKEN = ''
 
 application = Flask(__name__)
 
